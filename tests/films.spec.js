@@ -291,11 +291,65 @@ describe('Function "orderByYear"', () => {
 });
 
 // Exercise 6
-// YOUR CODE HERE. Test moviesAverageByCategory()
+//YOUR CODE HERE. Test moviesAverageByCategory()
 describe('Function "moviesAverageByCategory"', () => {
-  it('ADD YOUR CODE IN films.spec.js file', () => {
-    expect(typeof hoursToMinutes).toBe('coffee');
+
+  // Test 1: La función existe
+  it('should be declared', () => {
+    expect(typeof moviesAverageByCategory).toBe('function');
   });
+
+  // Test 2: Devuelve un número
+  it('should return a number', () => {
+    const sampleMovies = [
+      { title: 'Movie 1', genre: ['Drama'], score: 8 },
+      { title: 'Movie 2', genre: ['Action'], score: 7 }
+    ];
+    expect(typeof moviesAverageByCategory(sampleMovies, 'Drama')).toBe('number');
+  });
+
+  // Test 3: No devuelve NaN
+  it('should be different from NaN', () => {
+    const sampleMovies = [
+      { title: 'Movie 1', genre: ['Drama'], score: 8 },
+      { title: 'Movie 2', genre: ['Action'], score: 7 }
+    ];
+    expect(moviesAverageByCategory(sampleMovies, 'Drama')).not.toBeNaN();
+  });
+
+  // Test 4: Calcula correctamente la media con 2 decimales
+  it('should return the average score of movies selecting only the genre films, with 2 decimals', () => {
+    const sampleMovies = [
+      {
+        title: 'Paths of Glory',
+        year: 1957,
+        director: 'Stanley Kubrick',
+        duration: '1h 28min',
+        genre: ['Drama', 'War'],
+        score: 8.4
+      },
+      {
+        title: 'Django Unchained',
+        year: 2012,
+        director: 'Quentin Tarantino',
+        duration: '2h 45min',
+        genre: ['Drama', 'Western'],
+        score: 8.4
+      },
+      {
+        title: 'Pulp Fiction',
+        year: 1994,
+        director: 'Quentin Tarantino',
+        duration: '2h 34min',
+        genre: ['Crime', 'Drama'],
+        score: 8.9
+      }
+    ];
+
+    const result = moviesAverageByCategory(sampleMovies, 'Drama');
+    expect(result).toBeCloseTo(8.57, 2); // toBeCloseTo permite comparar decimales
+  });
+
 });
 
 // Exercise 7
